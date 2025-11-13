@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Torneio de Truco | Encontro Agro-sol 2025</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body class="theme-1">
+
+  <header>
+    <div class="header-content">
+      <img src="logo-agrosol.png" alt="Logo Agro-sol Sementes" class="company-logo">
+      <h1>Encontro Agro-sol 2025 | Torneio de Truco</h1>
+    </div>
+    </header>
+
+  <main class="container" style="position: relative; min-height: 600px;">
+
+    <section id="adminArea" class="page-section">
+      <h2>Configuração do Torneio</h2>
+      <section class="upload-area" id="uploadArea">
+        <p>Arraste a planilha de duplas/jogadores aqui</p>
+        <input type="file" id="fileInput" accept=".xlsx, .xls">
+        <label for="fileInput">Carregar Planilha</label>
+        <div class="options" style="margin-top: 15px;">
+          <label>
+            <input type="radio" name="modo" value="duplas" checked> Duplas Prontas (1 por linha)
+          </label>
+          <label>
+            <input type="radio" name="modo" value="individuais"> Jogadores Individuais (Sortear duplas)
+          </label>
+        </div>
+        <p id="fileName" class="file-info"></p>
+      </section>
+
+      <div class="button-group">
+        <button id="reshuffleButton" class="button-secondary button-disabled" disabled>Re-embaralhar Duplas</button>
+        <button id="generateBracketButton" class="button-start button-disabled" disabled>Sortear e Gerar Chaves</button>
+      </div>
+
+      <p id="message" class="message" style="display: none;"></p>
+    </section>
+
+    <section id="bracketArea" class="page-section">
+      <h2 style="margin-top: 30px;">Chaveamento do Torneio</h2>
+      <div class="tournament-bracket" id="bracketContainer">
+        </div>
+      
+      <div id="thirdPlaceArea" class="hidden"> <h2 style="margin-top: 30px;">Disputa de 3º Lugar</h2>
+          <div class="tournament-bracket" id="thirdPlaceContainer">
+              </div>
+      </div>
+      
+      <div class="button-group">
+        <button id="viewPodiumButton" class="button-secondary" style="display: none;">Ver Pódio</button>
+        <button id="resetTournamentButton" class="button-reset">Resetar Torneio (CUIDADO)</button>
+      </div>
+    </section>
+
+    <section id="podiumArea" class="page-section">
+      <h2 style="margin-top: 30px; text-align: center;">🏆 Pódio dos Vencedores! 🏆</h2>
+      <div class="podium-container" id="podiumContainerToSave">
+          <div class="podium-step podium-second">
+              <span>2º Lugar</span>
+              <strong id="winner2nd"></strong>
+          </div>
+          <div class="podium-step podium-first">
+              <span>1º Lugar</span>
+              <strong id="winner1st"></strong>
+          </div>
+          <div class="podium-step podium-third">
+              <span>3º Lugar</span>
+              <strong id="winner3rd"></strong>
+          </div>
+      </div>
+      
+      <div class="button-group">
+        <button id="viewBracketButton" class="button-secondary">Ver Chaveamento</button>
+        <button id="downloadPodiumButton" class="button-secondary">Baixar Pódio</button>
+        <button id="resetTournamentButtonPodium" class="button-reset">Começar Novo Torneio</button>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Agro-sol Sementes. Todos os direitos reservados.</p>
+  </footer>
+
+  <audio id="winSound" src="https://assets.mixkit.co/sfx/preview/mixkit-achievement-bell-600.mp3" preload="auto"></audio>
+  <audio id="podiumSound" src="https://assets.mixkit.co/sfx/preview/mixkit-positive-notification-4-1011.mp3" preload="auto"></audio>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  
+  <script src="script.js"></script>
+</body>
+</html>

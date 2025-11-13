@@ -1,0 +1,481 @@
+/* ========================================= */
+/* 1. Variáveis e Estilos Globais            */
+/* ========================================= */
+:root {
+  --primary-color: #4CAF50; /* Verde Agro */
+  --secondary-color: #FFC107; /* Amarelo Sol */
+  --tertiary-color: #388E3C;
+  --dark-color: #333;
+  --light-color: #fff;
+  --grey-color: #f4f4f4;
+  --border-radius-base: 8px;
+  --box-shadow-base: 0 4px 12px rgba(0, 0, 0, 0.08);
+  --spacing-sm: 8px;
+  --spacing-md: 16px;
+  --spacing-lg: 32px;
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: var(--grey-color);
+  color: var(--dark-color);
+  line-height: 1.6;
+  transition: background-color 1.5s ease;
+}
+
+/* ========================================= */
+/* 2. Temas (Do seu sorteador original)      */
+/* ========================================= */
+.theme-1 { --primary-color: #4CAF50; --secondary-color: #FFC107; --tertiary-color: #388E3C; }
+.theme-2 { --primary-color: #2196F3; --secondary-color: #FF9800; --tertiary-color: #1976D2; }
+.theme-3 { --primary-color: #9C27B0; --secondary-color: #CDDC39; --tertiary-color: #7B1FA2; }
+.theme-4 { --primary-color: #E91E63; --secondary-color: #00BCD4; --tertiary-color: #C2185B; }
+.theme-5 { --primary-color: #FF5722; --secondary-color: #8BC34A; --tertiary-color: #E64A19; }
+
+
+/* ========================================= */
+/* 3. Layout (Header, Main, Footer)          */
+/* ========================================= */
+.container {
+  max-width: 1200px;
+  margin: var(--spacing-md) auto;
+  padding: var(--spacing-md);
+  background: var(--light-color);
+  border-radius: var(--border-radius-base);
+  box-shadow: var(--box-shadow-base);
+}
+
+header {
+  background: linear-gradient(135deg, var(--primary-color), var(--tertiary-color));
+  color: var(--light-color);
+  padding: var(--spacing-md) var(--spacing-lg);
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+  
+  /* Adicionado para suportar o botão de tema */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header-content {
+  display: flex;
+  align-items: center;
+  /* Removido max-width e margin para o flex do header funcionar */
+}
+
+.company-logo {
+  height: 60px;
+  width: auto;
+  margin-right: var(--spacing-md);
+}
+
+header h1 {
+  margin: 0;
+  font-size: 1.8em;
+}
+
+footer {
+  text-align: center;
+  margin-top: var(--spacing-md);
+  color: #777;
+  font-size: 0.9em;
+}
+
+/* .hidden FOI REMOVIDO E SUBSTITUÍDO POR .page-section */
+
+/* ========================================= */
+/* 4. ÁREA DE TRANSIÇÕES DE TELA (NOVO)      */
+/* ========================================= */
+.page-section {
+    /* Começa invisível */
+    display: none;
+    opacity: 0;
+    visibility: hidden;
+    
+    /* Animação */
+    transition: opacity 0.5s ease-in-out;
+}
+.page-section.is-visible {
+    /* Torna-se visível */
+    display: block;
+    opacity: 1;
+    visibility: visible;
+}
+/* A área de 3º lugar ainda usa 'hidden' pois é parte da TELA 2 */
+.hidden {
+  display: none;
+}
+
+/* ========================================= */
+/* 5. Área de Upload (Admin)                 */
+/* ========================================= */
+.upload-area {
+  border: 3px dashed #ddd;
+  border-radius: var(--border-radius-base);
+  padding: var(--spacing-lg);
+  text-align: center;
+  background-color: #fcfcfc;
+  transition: background-color 0.3s ease;
+}
+.upload-area.highlight {
+  background-color: #f0fff0;
+  border-color: var(--primary-color);
+}
+.upload-area input[type="file"] {
+  display: none;
+}
+.upload-area label {
+  background-color: var(--primary-color);
+  color: var(--light-color);
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1.1em;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+.upload-area label:hover {
+  background-color: var(--tertiary-color);
+}
+.file-info {
+  font-weight: bold;
+  color: var(--tertiary-color);
+  margin-top: var(--spacing-md);
+}
+.options label {
+  background: none;
+  color: var(--dark-color);
+  font-size: 1em;
+  font-weight: normal;
+  margin: 0 var(--spacing-sm);
+}
+
+/* ========================================= */
+/* 6. Botões e Mensagens                     */
+/* ========================================= */
+.button-group {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap; /* Permite que botões quebrem a linha */
+  gap: var(--spacing-md);
+  margin: var(--spacing-lg) 0;
+}
+
+.button-start, .button-reset, .button-secondary {
+  padding: 12px 28px;
+  font-size: 1.2em;
+  font-weight: bold;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.button-start {
+  background-color: var(--primary-color);
+  color: var(--light-color);
+  box-shadow: 0 4px 0 var(--tertiary-color);
+}
+.button-start:hover {
+  background-color: var(--tertiary-color);
+  transform: translateY(-2px);
+}
+
+.button-reset {
+  background-color: #f44336;
+  color: var(--light-color);
+  box-shadow: 0 4px 0 #d32f2f;
+}
+.button-reset:hover {
+  background-color: #d32f2f;
+  transform: translateY(-2px);
+}
+
+.button-secondary {
+  background-color: #f0ad4e; /* Laranja/Amarelo */
+  color: var(--light-color);
+  box-shadow: 0 4px 0 #e6951d;
+}
+.button-secondary:hover {
+  background-color: #e6951d;
+  transform: translateY(-2px);
+}
+
+.button-disabled {
+  background-color: #ccc !important;
+  color: #888 !important;
+  cursor: not-allowed !important;
+  box-shadow: 0 4px 0 #999 !important;
+  transform: none !important;
+}
+
+.message {
+  padding: var(--spacing-md);
+  margin: var(--spacing-md) 0;
+  border-radius: 5px;
+  font-weight: bold;
+  text-align: center;
+}
+.message.success { background-color: #e8f5e9; color: #2e7d32; }
+.message.error   { background-color: #ffebee; color: #c62828; }
+.message.info    { background-color: #e3f2fd; color: #1565c0; }
+
+/* ========================================= */
+/* 7. Estilos do Chaveamento (Bracket)       */
+/* ========================================= */
+.tournament-bracket {
+    display: flex;
+    overflow-x: auto; /* Permite rolar horizontalmente */
+    padding: var(--spacing-md);
+    background-color: var(--grey-color);
+    border-radius: var(--border-radius-base);
+    border: 1px solid #ddd;
+    min-height: 400px;
+}
+
+#bracketContainer .round {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    flex: 1 1 280px; 
+    min-width: 280px;
+    padding-right: 20px; 
+}
+
+.round-title {
+    font-size: 1.3em;
+    font-weight: bold;
+    color: var(--dark-color);
+    text-align: center;
+    margin-bottom: var(--spacing-md);
+    text-transform: uppercase;
+}
+
+#bracketContainer .match {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    background: var(--light-color);
+    border: 1px solid #ccc;
+    border-radius: var(--border-radius-base);
+    box-shadow: var(--box-shadow-base);
+    margin: var(--spacing-md) 0;
+}
+
+/* ESTILO DO PLACAR (NOVO) */
+.match-score {
+    font-size: 0.9em;
+    font-weight: bold;
+    color: var(--tertiary-color);
+    text-align: center;
+    padding: var(--spacing-sm) 0;
+    border-top: 1px dashed #eee;
+}
+
+/* Linhas conectoras - SÓ PARA O BRACKET PRINCIPAL */
+#bracketContainer .match::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    right: -20px;
+    width: 20px;
+    height: 2px;
+    background-color: #ccc;
+    z-index: 1;
+}
+#bracketContainer .match::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: -20px;
+    width: 20px;
+    height: 50%;
+    border: 2px solid #ccc;
+    border-right: none;
+    z-index: 1;
+}
+#bracketContainer .round-0 .match::before { display: none; }
+#bracketContainer .match:nth-of-type(odd)::before {
+    top: 50%;
+    height: calc(50% + var(--spacing-md));
+    border-top: none;
+    transform: translateY(-2px);
+}
+#bracketContainer .match:nth-of-type(even)::before {
+    top: calc(0% - var(--spacing-md));
+    height: calc(50% + var(--spacing-md));
+    border-bottom: none;
+    transform: translateY(2px);
+}
+#bracketContainer .round:last-of-type .match::after,
+#bracketContainer .round.campeao .match::after,
+#bracketContainer .round.campeao .match::before {
+    display: none;
+}
+#bracketContainer .match:nth-of-type(odd):nth-last-of-type(1)::before { display: none; }
+#bracketContainer .match:nth-of-type(even):nth-last-of-type(2)::before { display: none; }
+
+/* Estilos de .team e .admin-winner-button */
+.team {
+    padding: var(--spacing-sm) var(--spacing-md);
+    background: #f9f9f9;
+    border-bottom: 1px solid #eee;
+    font-size: 1em;
+    height: 45px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.team:first-of-type {
+  border-top-left-radius: var(--border-radius-base);
+  border-top-right-radius: var(--border-radius-base);
+}
+.team:last-of-type {
+  border-bottom: none;
+  border-bottom-left-radius: var(--border-radius-base);
+  border-bottom-right-radius: var(--border-radius-base);
+}
+.team.winner {
+    font-weight: bold;
+    color: var(--primary-color);
+    background-color: #f0fff0;
+}
+.team.bye {
+    color: #999;
+    font-style: italic;
+}
+.team-name {
+    flex-grow: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.admin-winner-button {
+    background-color: var(--secondary-color);
+    color: var(--dark-color);
+    font-weight: bold;
+    padding: 4px 8px;
+    font-size: 0.8em;
+    margin-left: 8px;
+    border-radius: 3px;
+    border: none;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: background-color 0.2s ease;
+}
+.admin-winner-button:hover {
+    background-color: #FFB300;
+}
+
+/* Campeão - SÓ PARA O BRACKET PRINCIPAL */
+#bracketContainer .round.campeao .match {
+    border: 2px solid var(--secondary-color);
+    background: linear-gradient(135deg, var(--primary-color), var(--tertiary-color));
+}
+#bracketContainer .round.campeao .team {
+    font-size: 1.3em;
+    font-weight: bold;
+    color: var(--light-color);
+    background: transparent;
+    justify-content: center;
+    height: 60px;
+}
+
+/* ========================================= */
+/* 8. Estilos da Disputa de 3º Lugar         */
+/* ========================================= */
+#thirdPlaceContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: var(--spacing-md);
+    background-color: var(--grey-color);
+    border-radius: var(--border-radius-base);
+    border: 1px solid #ddd;
+}
+#thirdPlaceContainer .match {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    background: var(--light-color);
+    border: 1px solid #ccc;
+    border-radius: var(--border-radius-base);
+    box-shadow: var(--box-shadow-base);
+    margin: var(--spacing-md) 0;
+    width: 100%;
+}
+#thirdPlaceContainer .round {
+    padding-right: 0;
+    width: 300px;
+}
+
+/* ========================================= */
+/* 9. Estilos do Pódio                       */
+/* ========================================= */
+.podium-container {
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    gap: 10px;
+    height: 350px;
+    padding: var(--spacing-lg);
+    border-radius: var(--border-radius-base);
+    background-color: var(--grey-color);
+    border: 1px solid #ddd;
+}
+.podium-step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 30%;
+    min-width: 150px;
+    padding: var(--spacing-md);
+    border-radius: var(--border-radius-base) var(--border-radius-base) 0 0;
+    box-shadow: var(--box-shadow-base);
+    text-align: center;
+}
+.podium-step span {
+    font-size: 1.5em;
+    font-weight: bold;
+    color: var(--dark-color);
+}
+.podium-step strong {
+    font-size: 1.2em;
+    color: var(--light-color);
+    margin-top: var(--spacing-sm);
+}
+.podium-first {
+    height: 300px;
+    background: linear-gradient(135deg, var(--secondary-color), #FFB300); /* Dourado */
+    border: 2px solid #FFB300;
+}
+.podium-first span { color: #fff; font-size: 2em; }
+.podium-first strong { font-size: 1.5em; color: #fff; }
+.podium-second {
+    height: 250px;
+    background: linear-gradient(135deg, #C0C0C0, #9E9E9E); /* Prata */
+    border: 2px solid #9E9E9E;
+}
+.podium-second strong { color: var(--dark-color); }
+.podium-third {
+    height: 200px;
+    background: linear-gradient(135deg, #CD7F32, #A0522D); /* Bronze */
+    border: 2px solid #A0522D;
+}
+
+/* ========================================= */
+/* 10. DESTAQUE DO LOGO                      */
+/* ========================================= */
+
+.company-logo {
+    /* Adiciona uma "sombra" branca atrás dos pixels do logo.
+       Isso cria um brilho sutil que o separa de fundos escuros.
+       Usamos duas sombras para aumentar a intensidade.
+    */
+    filter: drop-shadow(0 0 6px white) drop-shadow(0 0 2px white);
+}
