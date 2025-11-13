@@ -1,4 +1,4 @@
-# 🏆 Torneio de Truco - Encontro Agro-sol 2025
+# 🏆 Torneio de Truco
 
 > Um sistema web para gerenciamento e exibição de um torneio de truco, projetado para ser exibido em um painel de LED durante o evento.
 
